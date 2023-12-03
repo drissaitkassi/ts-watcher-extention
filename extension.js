@@ -1,6 +1,5 @@
 // The module 'vscode' contains the VS Code extensibility API
 
-import { create } from 'domain';
 
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
@@ -24,6 +23,7 @@ function activate(context) {
 		vscode.window.showInformationMessage('Hello World from ts-watcher!');
 	});
 
+	
 
 		//check os 
 		// create a new terminal depaning on the platform check above idealy  to avoid collision with user terminal 
@@ -33,7 +33,9 @@ function activate(context) {
 		switch (targetPlatform) {
 			case 'darwin':
 				// create zsh terminal instance 
-				console.log(" im on mac ")
+			console.log(" im on mac ")
+			let customTerminal=vscode.window.createTerminal('driss','/bin/zsh')
+			customTerminal.show()
 				break;
 			case 'linux':
 			// create bash terminal instance 
@@ -83,6 +85,7 @@ function activate(context) {
 			console.log('active teminal name :'+ vscode.window.activeTerminal.name)
 			vscode.window.activeTerminal.sendText(`tsc ${currentFileName}`)
 			vscode.window.activeTerminal.sendText(`node ${targetFileName}`)
+	
 			vscode.window.showInformationMessage('on save event ts-watcher! ');
 			console.log('test final')
 
